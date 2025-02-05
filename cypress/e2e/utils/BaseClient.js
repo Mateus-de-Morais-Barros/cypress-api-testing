@@ -1,6 +1,6 @@
 export class BaseClient {
     
-    listarUsuarios(page) {
+    listUsers(page) {
         return cy.request({
             method:"GET",
             url:`https://reqres.in/api/users?page=${page}`,
@@ -8,12 +8,32 @@ export class BaseClient {
             })
     }
 
-    listarUmUsuario(id) {
+    listOneUser(id) {
         return cy.request({
             method:"GET",
             url:`https://reqres.in/api/users/${id}`,
             failOnStatusCode: false,
             })
     }
-    
+
+    createUser(reqBody) {
+        return cy.request({
+            method:"POST",
+            url:`https://reqres.in/api/users`,
+            failOnStatusCode: false,
+            body:reqBody
+            })
+    }
+
+    updateUser(reqBody, id) {
+        return cy.request({
+            method:"PUT",
+            url:`https://reqres.in/api/users/${id}`,
+            failOnStatusCode: false,
+            body:reqBody
+            })
+    }
+
+
+  
 }

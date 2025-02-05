@@ -6,7 +6,7 @@ describe('List One User', () => {
   const baseClient = new BaseClient();
   
   it('Validates status code on request success', () => {
-    baseClient.listarUmUsuario(2).then((res)=>{
+    baseClient.listOneUser(2).then((res)=>{
       expect(res.status).to.eq(200)
       expect(res.body.data.id).to.eq(2)
       console.log(res.body);
@@ -20,12 +20,16 @@ describe('List One User', () => {
   })
 
   it('Validates status code when user is not found', () => {
-    baseClient.listarUmUsuario(23).then((res)=>{
+    baseClient.listOneUser(23).then((res)=>{
       expect(res.status).to.eq(404)
     })
   })
 
-
+  it('Validates status code when trying to find user -1', () => {
+    baseClient.listOneUser(-1).then((res)=>{
+      expect(res.status).to.eq(404)
+    })
+  })
 
 
 
