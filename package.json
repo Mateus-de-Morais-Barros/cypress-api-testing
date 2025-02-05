@@ -1,8 +1,10 @@
 {
   "devDependencies": {
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
     "cypress": "^14.0.1"
   },
   "scripts": {
-    "test":"npx cypress run --headless"
+    "test": "npx cypress run --headless"
   }
 }
