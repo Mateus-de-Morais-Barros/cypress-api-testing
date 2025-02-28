@@ -1,6 +1,4 @@
 import { BaseClient } from '../utils/BaseClient'
-import Ajv from 'ajv';
-import addFormats from "ajv-formats";
 
 describe('List One User', () => {
   const baseClient = new BaseClient();

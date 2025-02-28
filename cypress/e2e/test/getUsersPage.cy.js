@@ -6,20 +6,20 @@ describe('List Users', () => {
   const baseClient = new BaseClient();
   
   it('Validates status code on request success', () => {
-    baseClient.listarUsuarios(2).then((res)=>{
+    baseClient.listUsers(2).then((res)=>{
       expect(res.status).to.eq(200)
     })
   })
 
   it('Validates page number on request success', () => {
-    baseClient.listarUsuarios(2).then((res)=>{
+    baseClient.listUsers(2).then((res)=>{
       expect(res.body.page).to.eq(2)
     })
   })
 
   it('Validates response structure on request success', () => {
     cy.fixture("userList.json").then((schema) => {
-      baseClient.listarUsuarios(2).then((res)=>{
+      baseClient.listUsers(2).then((res)=>{
         expect(res.status).to.eq(200)
 
         const ajv = new Ajv();

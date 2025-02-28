@@ -34,6 +34,23 @@ export class BaseClient {
             })
     }
 
+    deleteUser(id) {
+        return cy.request({
+            method:"DELETE",
+            url:`https://reqres.in/api/users/${id}`,
+            failOnStatusCode: false,
+            })
+    }
 
-  
+    registerUser(reqBody) {
+        return cy.request({
+            method:"POST",
+            url:`https://reqres.in/api/register`,
+            failOnStatusCode: false,
+            body:reqBody
+            })
+    }   
+
+
+
 }
