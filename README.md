@@ -40,10 +40,10 @@ Comando que já faz tudo pra você:
 ## Screenshots
 
 <div style="display:flex; flex-direction:column; gap:10px;">
-    <img src="./images/project%20board%20on%20notion.png" width="auto" heigth="200px">
-<div style="display:flex; flex-direction:row; gap:10px;">
-    <img src="./images/test%20cases%20on%20docs.png" width="500px" heigth="300px">
-    <img src="./images/test%20cases%20on%20docs%202.png" width="500px" heigth="300px">
+    <img src="./images/project%20board%20on%20notion.png" width="100%" heigth="auto">
+<div style="display:flex; flex-direction:row; gap:2%;">
+    <img src="./images/test%20cases%20on%20docs.png" width="49%" heigth="auto">
+    <img src="./images/test%20cases%20on%20docs%202.png" width="49%" heigth="auto">
 </div>
 </div>
 
