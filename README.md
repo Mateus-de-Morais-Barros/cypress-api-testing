@@ -22,18 +22,20 @@ Instale as dependências com npm
   npm install
 ```
 
-## Quero ver ação
-
-```bash
-  npm install && npm run tests && npm run allure_fresh
-```
-
 ## Rodando o programa
 
 Criei 3 comandos principais:
 - ``npm run tests`` executa os testes no cypress sem gerar um relatório ou abrir o navegador
 - ``npm run allure_fresh`` gera o relatório com os dados dos testes que foram executados e abre no navegador
 - ``npm run new_tests`` executa os testes no cypress, gera um relatório e abre no navegador
+
+## Quero ver ação
+
+Comando que já faz tudo pra você:
+
+```bash
+  npm install && npm run tests && npm run allure_fresh
+```
     
 ## Screenshots
 
