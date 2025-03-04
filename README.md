@@ -1,140 +1,58 @@
-# cypress-api-testing
-Testing the "reqres.in" API with Cypress
+
+# Reqres Cypress Automation 
+
+Esse é um projeto de automação de testes de API usando cypress. O objetivo do projeto vai além do estudo de automação, como também fiz uso de técnicas e procedimentos que vemos em uma atuação real em grandes empresas do mercado.
+
+O quadro kanban foi feito no [Notion](https://www.notion.so/Task-Board-18b63fea5bac80eb99ddf0320d7da6bd?pvs=4) e contém links para o [plano de testes](https://docs.google.com/document/d/1Bx3HUjIUrf4ww-i4IWgJjao8oXyCgjqAoZrW2si5r8s/edit?usp=sharing) e para os [cenários e casos de teste](https://docs.google.com/document/d/1bq1MrGgBzF0IhFSVTATTnrDizXwLRRrI/edit?usp=sharing&ouid=103010263055064496196&rtpof=true&sd=true).
 
 
+## Funcionalidades
 
-Cypress is a powerful end-to-end testing framework for web applications, and it can be used for **API testing** as well. Here’s how to set up and use Cypress for testing APIs step by step.  
+- Testes funcionais
+- Testes de contrato
+- Testes de saúde
+- Geração de relatório de testes
+- Screenshots dos cenários que falham
 
----
+## Instalação
 
-## **1️⃣ Install Cypress**  
-If you haven't installed Cypress yet, use:  
-```sh
-npm install cypress --save-dev
-```
-Then, open Cypress:  
-```sh
-npx cypress open
-```
+Instale as dependências com npm
 
----
-
-## **2️⃣ Create API Test Cases**  
-1. Inside Cypress, go to **`cypress/e2e`** and create a new test file, e.g., `api_tests.cy.js`.  
-2. Use the `cy.request()` method to send API requests.
-
-### **Example: Testing a REST API**
-```js
-describe('API Testing with Cypress', () => {
-  
-  it('GET Request - Validate Response', () => {
-    cy.request('https://jsonplaceholder.typicode.com/posts/1')
-      .should((response) => {
-        expect(response.status).to.eq(200);
-        expect(response.body).to.have.property('id', 1);
-      });
-  });
-
-  it('POST Request - Create a Resource', () => {
-    cy.request('POST', 'https://jsonplaceholder.typicode.com/posts', {
-      title: 'Cypress Test',
-      body: 'Testing API with Cypress',
-      userId: 1
-    }).should((response) => {
-      expect(response.status).to.eq(201);
-      expect(response.body).to.have.property('title', 'Cypress Test');
-    });
-  });
-
-  it('PUT Request - Update a Resource', () => {
-    cy.request('PUT', 'https://jsonplaceholder.typicode.com/posts/1', {
-      title: 'Updated Title'
-    }).should((response) => {
-      expect(response.status).to.eq(200);
-      expect(response.body).to.have.property('title', 'Updated Title');
-    });
-  });
-
-  it('DELETE Request - Remove a Resource', () => {
-    cy.request('DELETE', 'https://jsonplaceholder.typicode.com/posts/1')
-      .should((response) => {
-        expect(response.status).to.eq(200);
-      });
-  });
-
-});
+```bash
+  npm install
 ```
 
----
+## Quero ver ação
 
-## **3️⃣ Run the API Tests**
-You can run Cypress tests in **headless mode** using:  
-```sh
-npx cypress run --spec "cypress/e2e/api_tests.cy.js"
-```
-Or open the Cypress UI:  
-```sh
-npx cypress open
+```bash
+  npm install && npm run tests && npm run allure_fresh
 ```
 
----
+## Rodando o programa
 
-## **4️⃣ Handling Authentication (Token-based APIs)**
-For APIs requiring authentication, use `cy.request()` to store the token before running tests:  
-```js
-beforeEach(() => {
-  cy.request('POST', 'https://api.example.com/login', {
-    username: 'user',
-    password: 'pass'
-  }).then((response) => {
-    Cypress.env('token', response.body.token);
-  });
-});
+Criei 3 comandos principais:
+- ``npm run tests`` executa os testes no cypress sem gerar um relatório ou abrir o navegador
+- ``npm run allure_fresh`` gera o relatório com os dados dos testes que foram executados e abre no navegador
+- ``npm run new_tests`` executa os testes no cypress, gera um relatório e abre no navegador
+    
+## Screenshots
 
-it('GET request with Auth', () => {
-  cy.request({
-    method: 'GET',
-    url: 'https://api.example.com/data',
-    headers: {
-      Authorization: `Bearer ${Cypress.env('token')}`
-    }
-  }).should((response) => {
-    expect(response.status).to.eq(200);
-  });
-});
-```
+<div style="display:flex; flex-direction:column; gap:10px;">
+    <img src="./images/project%20board%20on%20notion.png" width="auto" heigth="200px">
+<div style="display:flex; flex-direction:row; gap:10px;">
+    <img src="./images/test%20cases%20on%20docs.png" width="500px" heigth="300px">
+    <img src="./images/test%20cases%20on%20docs%202.png" width="500px" heigth="300px">
+</div>
+</div>
 
----
 
-## **5️⃣ Assertions & Chaining Requests**
-Cypress allows **chaining multiple requests** to validate API responses:  
-```js
-cy.request('POST', 'https://api.example.com/create', { name: 'Test' })
-  .then((response) => {
-    const id = response.body.id;
-    return cy.request(`https://api.example.com/data/${id}`);
-  })
-  .should((response) => {
-    expect(response.status).to.eq(200);
-    expect(response.body.name).to.eq('Test');
-  });
-```
+## Referência
 
----
+ - [Reqres API](https://reqres.in/)
+ - [Cypress Docs](https://docs.cypress.io/app/get-started/why-cypress)
+ - [Allure Report Cypress](https://allurereport.org/docs/cypress/)
 
-## **6️⃣ Mock API Responses with Intercept**
-To test without calling real APIs, mock responses using `cy.intercept()`:  
-```js
-cy.intercept('GET', '/api/users', { fixture: 'users.json' }).as('getUsers');
-cy.visit('/');
-cy.wait('@getUsers').its('response.statusCode').should('eq', 200);
-```
+## Autores
 
----
+- [@Mateus-de-Morais-Barros](https://github.com/Mateus-de-Morais-Barros)
 
-### ✅ **Cypress is great for API testing because:**
-- It has built-in **retry logic**.
-- Works well with **both UI & API tests**.
-- Supports **request chaining** and **response validation**.
-
-Do you need help integrating Cypress API tests into CI/CD or any other aspect? 🚀

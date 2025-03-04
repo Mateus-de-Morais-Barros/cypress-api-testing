@@ -1,4 +1,4 @@
-import { BaseClient } from '../utils/BaseClient'
+import { BaseClient } from '../../utils/BaseClient'
 import Ajv from 'ajv';
 import addFormats from "ajv-formats";
 

@@ -51,6 +51,14 @@ export class BaseClient {
             })
     }   
 
+    loginUser(reqBody) {
+        return cy.request({
+            method:"POST",
+            url:`https://reqres.in/api/login`,
+            failOnStatusCode: false,
+            body:reqBody
+            })
+    }
 
 
 }

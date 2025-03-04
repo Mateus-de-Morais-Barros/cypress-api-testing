@@ -1,4 +1,4 @@
-import { BaseClient } from '../utils/BaseClient'
+import { BaseClient } from '../../utils/BaseClient'
 
 describe('List One User', () => {
   const baseClient = new BaseClient();
