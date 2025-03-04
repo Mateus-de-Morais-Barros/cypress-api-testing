@@ -1,3 +1,5 @@
 node_modules/
 screenshots/
 test.txt
+allure-report/
+allure-results/
